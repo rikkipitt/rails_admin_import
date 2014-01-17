@@ -39,7 +39,8 @@ module RailsAdminImport
  
       def belongs_to_fields
         attrs = self.reflections.select { |k, v| v.macro == :belongs_to }.keys
-        attrs - RailsAdminImport.config(self).excluded_fields 
+        attrs -= RailsAdminImport.config(self).excluded_fields
+        attrs - [:updated_by, :created_by, :second_type_of_work]
       end
   
       def many_fields
@@ -50,8 +51,7 @@ module RailsAdminImport
           end
         end
 
-        attrs - RailsAdminImport.config(self).excluded_fields 
-        attrs - [:updated_by, :created_by, :second_type_of_work]
+        attrs - RailsAdminImport.config(self).excluded_fields
       end 
   
       def run_import(params)
