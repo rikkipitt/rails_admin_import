@@ -51,6 +51,7 @@ module RailsAdminImport
         end
 
         attrs - RailsAdminImport.config(self).excluded_fields 
+        attrs - [:updated_by, :created_by, :second_type_of_work]
       end 
   
       def run_import(params)
